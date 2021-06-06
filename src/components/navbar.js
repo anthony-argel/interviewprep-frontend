@@ -18,6 +18,9 @@ const NavBar = (props) => {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                    <Link className="nav-link" to='/browse'>Browse</Link>
+                </li>
                 {props.loggedIn ? 
                 <li className="nav-item">
                     <p className="nav-link mb-0" onClick={logout} style={{cursor:'pointer'}}>Logout</p>
