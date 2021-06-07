@@ -1,13 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 const NavBar = (props) => {
+    const history = useHistory();
+    const [navQuery, setNavQuery] = useState('');
+
     const logout = (e) => {
         e.preventDefault();
         localStorage.removeItem('token');
         localStorage.removeItem('id');
         props.setLoggedIn(false);
     }
+
+    function searchQuestion(e) {
+        e.preventDefault();
+        if(navQuery === '') return;
+        const searchString = navQuery.split(' ').join('-');
+        history.push('/search/'+searchString+'/1');
+        setNavQuery('');
+    }
+
 
     return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -19,8 +31,16 @@ const NavBar = (props) => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                    <Link className="nav-link" to='/browse'>Browse</Link>
+                    <Link className="nav-link" to='/browse/1'>Browse</Link>
                 </li>
+                {
+                    props.loggedIn ?
+                    <li className="nav-item">
+                        <Link className="nav-link" to='/add'>Add Question</Link>
+                    </li>
+                    :
+                    null 
+                }
                 {props.loggedIn ? 
                 <li className="nav-item">
                     <p className="nav-link mb-0" onClick={logout} style={{cursor:'pointer'}}>Logout</p>
@@ -36,9 +56,11 @@ const NavBar = (props) => {
                 </div>
                 }
                 </ul>
-                <form className="d-flex">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button className="btn btn-outline-success" type="submit">Search</button>
+                <form onSubmit={searchQuestion}>
+                    <div className="input-group"> 
+                    <input className="form-control" type="search" placeholder="Search" aria-label="Search" aria-describedby="search-question-button" value={navQuery} onChange={e => setNavQuery(e.target.value)}/>
+                    <button className="btn btn-outline-success" type="submit" id="search-question-button">Search</button>
+                    </div>
                 </form>
             </div>
             </div>
