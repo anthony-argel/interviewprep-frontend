@@ -27,6 +27,7 @@ const Question = (props) => {
                 setVideos(res.videos);
                 setQuestionData(res.question);
                 setUserRating(res.userrating);
+                document.title = res.question.text + ' | InterviewPrep.net';
             }
         });
 

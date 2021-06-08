@@ -9,6 +9,8 @@ const NavBar = (props) => {
         e.preventDefault();
         localStorage.removeItem('token');
         localStorage.removeItem('id');
+        props.setToken(null);
+        props.setId(null);
         props.setLoggedIn(false);
     }
 

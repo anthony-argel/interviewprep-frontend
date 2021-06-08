@@ -10,6 +10,7 @@ const Search = (props) => {
         if(props.apiURL === '') return;
         const searchQuery = query.split('-').join(' ');
         setSearchedText(searchQuery);
+        document.title = "Search: " + searchQuery + " | InterviewPrep.net";
         fetch(props.apiURL + '/question/'+page+'/search?query='+searchQuery, {
             method:'GET',
             mode:'cors'

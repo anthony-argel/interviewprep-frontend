@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Login = (props) => {
@@ -6,6 +6,10 @@ const Login = (props) => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState(false);
     const history = useHistory();
+
+    useEffect(() => {
+        document.title = 'Login | InterviewPrep.net';
+    }, [])
 
     const submitForm = (e) => {
         if(props.apiURL === '') return;
@@ -29,6 +33,8 @@ const Login = (props) => {
             if(typeof res !== 'undefined') {
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('id', res.id);
+                props.setToken(res.token);
+                props.setId(res.id);
                 history.push('/');
             }
         })

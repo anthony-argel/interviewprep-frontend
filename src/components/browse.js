@@ -7,6 +7,7 @@ const Browse = (props) => {
     const [totalResults, setTotalResults] = useState(0);
 
     useEffect(() => {
+        document.title = 'Browse | InterviewPrep.net';
         if(props.apiURL === '') return;
         fetch(props.apiURL + '/question/limit/'+page, {
             method:'GET',
@@ -25,7 +26,7 @@ const Browse = (props) => {
     }, [props.apiURL, page])
 
     return (
-        <div className='container'>
+        <div className='container mt-4'>
             <div className='row justify-content-center'>
                 <div className='col-12 col-lg-8 shadow-lg p-4'>
                     {results.length > 0 ?

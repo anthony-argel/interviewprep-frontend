@@ -51,13 +51,13 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+        <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} setToken={setToken} setId={setId}/>
         <Switch>
           <Route path='/' exact><Home/></Route>
-          <Route path='/login' exact><Login apiURL={apiURL} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/></Route>
+          <Route path='/login' exact><Login apiURL={apiURL} setToken={setToken} setId={setId} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/></Route>
           <Route path='/signup' exact><Signup apiURL={apiURL}/></Route>
           <Route path='/browse/:page' exact><Browse apiURL={apiURL}/></Route>
-          <Route path='/video/:id' exact><Video apiURL={apiURL} loggedIn={loggedIn} /></Route>
+          <Route path='/video/:id' exact><Video apiURL={apiURL} loggedIn={loggedIn} id={id}  /></Route>
           <Route path='/add' exact><Add apiURL={apiURL} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/></Route>
           <Route path='/question/:qid' exact><Question apiURL={apiURL} id={id} loggedIn={loggedIn} /> </Route>
           <Route path='/search/:query/:page' exact><Search apiURL={apiURL} /></Route>

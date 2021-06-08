@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom';
 const Add = (props) => {
     const [question, setQuestion] = useState('');
     const history = useHistory();
+
+    useEffect(() => {
+        document.title = 'Add Question | InterviewPrep.net';
+    }, [])
+
     function addQuestion(e) {
         e.preventDefault();
         if(props.apiURL === '') return;
@@ -28,9 +33,9 @@ const Add = (props) => {
     }
 
     return (
-    <div className='container'>
+    <div className='container mt-4'>
         <div className='row justify-content-center'>
-            <div className='col-11 col-lg-9'>
+            <div className='col-11 col-lg-9 shadow-lg p-3'>
                 <h1 className='text-center'>Add a question</h1>
                 <p>Please make sure the question has not been asked already. All duplicate questions will be merged or deleted by a moderator.</p>
                 {props.loggedIn ?

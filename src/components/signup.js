@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Signup = (props) => {
@@ -8,6 +8,10 @@ const Signup = (props) => {
     const [rePassword, setRePassword] = useState('');
     const [errors, setErrors] = useState([]);
     const history = useHistory();
+
+    useEffect(() => {
+        document.title = 'Signup | InterviewPrep.net';
+    }, [])
 
     const submitForm = (e) => {
         e.preventDefault();

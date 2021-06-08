@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import {FaRegThumbsUp, FaRegThumbsDown} from 'react-icons/fa';
+import {MdClose} from 'react-icons/md';
 
 const Video = (props) => {
     const {id} = useParams();
@@ -45,8 +46,6 @@ const Video = (props) => {
                 setUserRating(res.result);
             }
         })
-
-
     }, [props.apiURL, reload]);
 
     function submitVote(e, rating) {
@@ -106,6 +105,16 @@ const Video = (props) => {
         }).then(res => setReloadComments(!reloadComments))
     }
 
+    function deleteComment(commentid) {
+        if(props.apiURL === '') return;
+        fetch(props.apiURL+'/comment/'+commentid, {
+            method:'DELETE',
+            mode:'cors',
+            headers: {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')},
+            body: JSON.stringify({videoid: id})
+        }).then(res => setReloadComments(!reloadComments))
+    }
+
     useEffect(() => {
         if(props.apiURL === '') return;
         fetch(props.apiURL+'/comment/'+id, {
@@ -116,9 +125,13 @@ const Video = (props) => {
             if(typeof res !== 'undefined') {
                 setComments(res.comments);
             }
-        })
+        });
 
-    }, [props.apiURL, reloadComments])
+        if(props.id === null) {
+            setUserRating(null);
+        }
+
+    }, [props.apiURL, reloadComments, props.loggedIn, props.id])
 
     
 
@@ -151,6 +164,9 @@ const Video = (props) => {
                         <FaRegThumbsDown size='2em' cursor='pointer' onClick={e => submitVote(e, -1)}/>
                         }
                     </div>
+                    {typeof videodata !== 'undefined' && videodata.poster._id === props.id ? 
+                    <p style={{cursor:'pointer', color:'blue', textDecoration:'underline'}} className='mt-5'>Delete Video</p>
+                : null}
                 </div>
             </div>
 
@@ -171,12 +187,14 @@ const Video = (props) => {
                         null
                     }
                     <hr/>
-                    <h3 className='text-center h3'>Comments</h3>
-                    {comments.length <= 0 ? <p>No comments</p> : 
+                    <h3 className='text-center h3'>Feedback</h3>
+                    {comments.length <= 0 ? <p>No feedback. </p> : 
                     comments.map((val) => {
                         return (
                             <div key={val._id} className='mb-5'>
-                                <p className='mb-0 h2 fw-bold'>{val.poster.username}</p>
+                                <p className='mb-0 h2 fw-bold'>{val.poster.username}
+                                <span>{val.poster._id === props.id ? <MdClose color='red' cursor='pointer' onClick={() => deleteComment(val._id)}/> : null}</span>
+                                </p>
                                 <p className='fs-5' style={{whiteSpace:'pre-wrap'}}>{val.text}</p>
                             </div>
                         )
