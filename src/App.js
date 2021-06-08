@@ -59,7 +59,7 @@ function App() {
           <Route path='/browse/:page' exact><Browse apiURL={apiURL}/></Route>
           <Route path='/video/:id' exact><Video apiURL={apiURL} loggedIn={loggedIn} /></Route>
           <Route path='/add' exact><Add apiURL={apiURL} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/></Route>
-          <Route path='/question/:qid' exact><Question apiURL={apiURL} id={id}/> </Route>
+          <Route path='/question/:qid' exact><Question apiURL={apiURL} id={id} loggedIn={loggedIn} /> </Route>
           <Route path='/search/:query/:page' exact><Search apiURL={apiURL} /></Route>
         </Switch>
       </BrowserRouter>

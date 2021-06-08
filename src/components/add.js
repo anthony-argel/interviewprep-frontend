@@ -32,7 +32,7 @@ const Add = (props) => {
         <div className='row justify-content-center'>
             <div className='col-11 col-lg-9'>
                 <h1 className='text-center'>Add a question</h1>
-                <p>Note: Please make sure the question has not been asked already. All duplicate questions will be merged or deleted by a moderator.</p>
+                <p>Please make sure the question has not been asked already. All duplicate questions will be merged or deleted by a moderator.</p>
                 {props.loggedIn ?
                 <form onSubmit={addQuestion}>
                     <div className='input-group'>

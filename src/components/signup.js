@@ -42,7 +42,7 @@ const Signup = (props) => {
     }
 
     return (
-        <div className='container'>
+        <div className='container mb-4'>
             <div className='row justify-content-center align-items-center mt-5'>
                 <div className='col-11 col-lg-5 d-flex flex-column justify-content-center align-items-center shadow-lg p-5'>
                     <h1>SIGN-UP</h1>

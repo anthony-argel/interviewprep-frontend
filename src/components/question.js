@@ -14,7 +14,11 @@ const Question = (props) => {
     useEffect(() => {
         if(props.apiURL === '') return;
         if(qid === '') return;
-        fetch(props.apiURL+'/question/'+qid+'/userid?query='+localStorage.getItem('id'), {
+        let fetchurl = props.apiURL+'/question/'+qid;
+        if(localStorage.getItem('id') !== null) {
+          fetchurl += '/userid?query='+localStorage.getItem('id'); 
+        }
+        fetch(fetchurl, {
             method: 'GET',
             mode: 'cors'
         }).then(res => res.json())
@@ -36,7 +40,7 @@ const Question = (props) => {
           }
         })
 
-        }, [props.apiURL, qid, reload])
+        }, [props.apiURL, qid, reload, props.loggedIn])
 
     function addVideo(e) {
         e.preventDefault();

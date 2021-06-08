@@ -15,7 +15,8 @@ const NavBar = (props) => {
     function searchQuestion(e) {
         e.preventDefault();
         if(navQuery === '') return;
-        const searchString = navQuery.split(' ').join('-');
+        let searchString = navQuery.split(' ').join('-');
+        searchString = searchString.replace('?', '');
         history.push('/search/'+searchString+'/1');
         setNavQuery('');
     }

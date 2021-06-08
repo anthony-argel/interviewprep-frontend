@@ -9,7 +9,8 @@ const Home = () => {
     function searchQuestions(e) {
         e.preventDefault();
         if(query === '') return;
-        const searchString = query.split(' ').join('-');
+        let searchString = query.split(' ').join('-');
+        searchString = searchString.replace('?', '');
         history.push('/search/'+searchString+'/1');
     }
 
