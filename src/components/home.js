@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './../assets/styles/style.css'; 
 import bgimage from './../assets/home.jpg';
 import {useHistory} from 'react-router-dom';
 

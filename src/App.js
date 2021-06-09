@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import NavBar from './components/navbar';
 import Home from './components/home';
 import Login from './components/login';
@@ -7,8 +9,8 @@ import Video from './components/video';
 import Browse from './components/browse';
 import Search from './components/search';
 import Question from './components/question';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import styles from './assets/style.css';
+
 function App() {
   const [apiURL, setAPIURL] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
@@ -16,7 +18,7 @@ function App() {
   const [id, setId] = useState('');
 
   useEffect(() => {
-     setAPIURL('http://localhost:6969');
+     setAPIURL('https://murmuring-caverns-80025.herokuapp.com');
      verifyToken();
   }, [])
 
