@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import {FaRegThumbsUp, FaRegThumbsDown} from 'react-icons/fa';
 import {MdClose} from 'react-icons/md';
 
@@ -12,7 +12,7 @@ const Video = (props) => {
     const [reload, setReload] = useState(false);
     const [reloadComments, setReloadComments] = useState(false);
     const [feedback, setFeedback] = useState('');
-
+    const history = useHistory();
 
     useEffect(() => {
         if(props.apiURL === '') return;
@@ -134,10 +134,18 @@ const Video = (props) => {
     }, [props.apiURL, reloadComments, props.loggedIn, props.id])
 
     
-
+    function deleteVideo(e) {
+        if(props.apiURL === '') return;
+        fetch(props.apiURL+'/video/'+id, {
+            method:'DELETE',
+            mode:'cors',
+            headers: {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')},
+            body: JSON.stringify({questionid: videodata.question._id})
+        }).then(res => history.push('/question/'+videodata.question._id))
+    }
     
     return (
-        <div className='container'>
+        <div className='container mt-4'>
             <div className='row'>
                 <div className='col-12 col-lg-5'>
                 {typeof videodata !== 'undefined' ?
@@ -165,7 +173,7 @@ const Video = (props) => {
                         }
                     </div>
                     {typeof videodata !== 'undefined' && videodata.poster._id === props.id ? 
-                    <p style={{cursor:'pointer', color:'blue', textDecoration:'underline'}} className='mt-5'>Delete Video</p>
+                    <p style={{cursor:'pointer', color:'blue', textDecoration:'underline'}} onClick={deleteVideo} className='mt-5'>Delete Video</p>
                 : null}
                 </div>
             </div>

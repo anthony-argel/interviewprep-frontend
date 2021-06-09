@@ -20,9 +20,9 @@ const Home = () => {
     }
 
     return (
-        <div className='d-flex flex-column justify-content-center align-items-center' style={{height:'90vh'}}> 
-            <h1 className='h1'>InterviewPrep.net</h1>
-            <h2 className='h2 mt-3 px-3'>Ask Interview Questions, Look at Video Responses, Give and Receive Feedback</h2>
+        <div className='d-flex flex-column justify-content-center align-items-center' style={{height:'100vh', backgroundImage:`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${bgimage})`, backgroundSize:'cover'}}> 
+            <h1 className='h1 mb-0 p-3 fw-bold' style={{color:'white'}}>InterviewPrep.net</h1>
+            <h2 className='h2 p-3 mx-3' style={{color:'white'}}>Ask Interview Questions, Look at Video Responses, Give and Receive Feedback</h2>
             <form className='w-50 mt-5' onSubmit={searchQuestions}>
             <div className="mb-1 d-flex">
                 <input type="string" className="form-control w-100" id="searchquery" onChange={e => setQuery(e.target.value)}/>

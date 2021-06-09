@@ -94,7 +94,7 @@ const Question = (props) => {
     }
 
     return (
-    <div className='container'>
+    <div className='container mt-4'>
         <div className='row justify-content-center'>
             <div className='col-12 col-lg-10'>
                 <div>
